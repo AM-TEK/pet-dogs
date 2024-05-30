@@ -1,53 +1,72 @@
+'use client';
+
 import React, { useEffect } from 'react';
+import { Loader } from '@googlemaps/js-api-loader';
 
-const Map = React.memo(() => {
+export default function Maps() {
+  const mapRef = React.useRef(null);
+
   useEffect(() => {
-    const initMap = () => {
+    const initializeMap = async () => {
+      const loader = new Loader({
+        apiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY,
+        version: 'quarterly',
+        libraries: ['places', 'marker'],
+      });
+
+      await loader.load();
+
       navigator.geolocation.getCurrentPosition(
-        position => {
-          const { latitude, longitude } = position.coords;
-
-          const map = new window.google.maps.Map(document.getElementById('map'), {
-            center: { lat: latitude, lng: longitude },
-            zoom: 15,
-            mapId: '83b2492a8c4e8a88'
-          });
-
-          const placesService = new window.google.maps.places.PlacesService(map);
-          const request = {
-            location: map.getCenter(),
-            radius: 5000,
-            type: 'pet_store',
+        (position) => {
+          const locationInMap = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
           };
 
-          placesService.nearbySearch(request, (results, status) => {
-            if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-              for (let i = 0; i < results.length; i++) {
-                const marker = new window.google.maps.marker.AdvancedMarkerElement({
-                  position: results[i].geometry.location,
-                  map,
-                  title: results[i].name,
-                });
+          const options = {
+            center: locationInMap,
+            zoom: 15,
+            mapId: 'NEXT_MAPS_TUTS',
+          };
 
-                marker.setMap(map);
-              }
+          const map = new google.maps.Map(mapRef.current, options);
+
+          const { AdvancedMarkerElement } = google.maps.marker;
+
+          new AdvancedMarkerElement({
+            map: map,
+            position: locationInMap,
+          });
+          // Places Service
+          const service = new google.maps.places.PlacesService(map);
+          const request = {
+            location: locationInMap,
+            radius: '5000',
+            type: ['pet_store'],
+          };
+
+          service.nearbySearch(request, (results, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK && results) {
+              results.forEach((place) => {
+                new google.maps.marker.AdvancedMarkerElement({
+                  map: map,
+                  position: place.geometry.location,
+                  title: place.name,
+                });
+              });
+            } else {
+              console.error('Error fetching pet shops:', status);
             }
           });
         },
-        error => {
+        (error) => {
           console.error('Error getting user location:', error);
         }
       );
     };
 
-    if (window.google && window.google.maps && window.google.maps.marker) {
-      initMap();
-    } else {
-      window.initMap = initMap;
-    }
+    initializeMap();
   }, []);
 
-  return <div id="map" style={{ width: '100%', height: '400px' }}></div>;
-});
-
-export default Map;
+  return <div className="h-[600px] m-4" ref={mapRef} />;
+}

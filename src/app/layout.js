@@ -14,15 +14,9 @@ const apiKey = process.env.NEXT_PUBLIC_API_KEY;
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <head>
-        <Script
-          src={`https://maps.googleapis.com/maps/api/js?key=${apiKey}&loading=async&callback=initMap&libraries=places,marker`}
-          strategy="afterInteractive"
-          async
-          defer
-        />
-      </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className} suppressHydrationWarning={true}>
+        {children}
+      </body>
     </html>
   );
 }

@@ -79,56 +79,6 @@ function DogList() {
     }
   };
   
-  // const MapComponent = React.memo(() => {
-  //   useEffect(() => {
-  //     const initMap = () => {
-  //       navigator.geolocation.getCurrentPosition(
-  //         position => {
-  //           const { latitude, longitude } = position.coords;
-  
-  //           const map = new window.google.maps.Map(document.getElementById('map'), {
-  //             center: { lat: latitude, lng: longitude },
-  //             zoom: 15,
-  //             mapId: '83b2492a8c4e8a88'
-  //           });
-  
-  //           const placesService = new window.google.maps.places.PlacesService(map);
-  //           const request = {
-  //             location: map.getCenter(),
-  //             radius: 5000,
-  //             type: 'pet_store',
-  //           };
-  
-  //           placesService.nearbySearch(request, (results, status) => {
-  //             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-  //               for (let i = 0; i < results.length; i++) {
-  //                 const marker = new window.google.maps.marker.AdvancedMarkerElement({
-  //                   position: results[i].geometry.location,
-  //                   map,
-  //                   title: results[i].name,
-  //                 });
-  
-  //                 marker.setMap(map);
-  //               }
-  //             }
-  //           });
-  //         },
-  //         error => {
-  //           console.error('Error getting user location:', error);
-  //         }
-  //       );
-  //     };
-  
-  //     if (window.google && window.google.maps && window.google.maps.marker) {
-  //       initMap();
-  //     } else {
-  //       window.initMap = initMap;
-  //     }
-  //   }, []);
-  
-  //   return <div id="map" style={{ width: '100%', height: '400px' }}></div>;
-  // });
-  
   return (
     <div className="flex flex-col divide-x-4 lg:flex-row bg-sky-100">
       <section className="w-full p-4 lg:w-1/2">
@@ -156,9 +106,6 @@ function DogList() {
       </section>
       <section className="w-full p-4 lg:w-1/2">
         <Favorites favorites={favorites} quizSubmitted={quizSubmitted} />
-      </section>
-      <section className="w-full p-4">
-        <Map />
       </section>
     </div>
   );
