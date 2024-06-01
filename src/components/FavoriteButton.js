@@ -4,7 +4,7 @@ function FavoriteButton({ onClick }) {
   return (
     <button
       onClick={onClick}
-      className="bg-blue-500 hover:bg-blue-700 text-white text-sm p-1 mx-4 my-1 rounded-md"
+      className="p-1 mx-2 my-1 text-sm text-black bg-yellow-300 border border-black rounded-md hover:bg-yellow-500"
     >
       Add to Favorites
     </button>

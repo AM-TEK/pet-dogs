@@ -4,7 +4,7 @@ function SubmitButton({ onClick }) {
   return (
     <button 
       onClick={onClick}
-      className='bg-blue-500 hover:bg-blue-700 text-white font-bold p-2 m-4 rounded-md'
+      className="p-1 mx-2 my-1 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-700"
     >
       Submit Answers
     </button>

@@ -2,18 +2,18 @@ import React from 'react';
 
 function DogQuiz({ dog, handleAnswer, userAnswers }) {
   return (
-    <div className='flex'>
+    <div className='flex flex-col md:flex-row'>
       <img 
         src={dog.image} 
         alt={dog.breed} 
-        className='m-4 rounded-lg w-32 h-32 object-cover' 
+        className='object-cover w-32 h-32 m-2 rounded-lg' 
       />
       <ul>
         {dog.options.map(option => (
-          <li key={option}>
+          <li key={option} className='my-1'>
             <button 
               onClick={() => handleAnswer(dog.id, option)}
-              className={`border mx-4 my-2 p-1 rounded-md text-sm ${userAnswers[dog.id] === option ? 'border-blue-500' : 'border-gray-300'} hover:bg-gray-100 hover:border-gray-400`}
+              className={`border mx-2 my-1 p-1 rounded-md text-sm ${userAnswers[dog.id] === option ? 'bg-yellow-300' : 'border-gray-400'} hover:bg-yellow-50`}
             >
               {option}
             </button>
