@@ -1,8 +1,6 @@
-import React from 'react';
-
 function DogQuiz({ dog, handleAnswer, userAnswers }) {
   return (
-    <div className='flex flex-col md:flex-row'>
+    <div className='flex flex-col items-center md:flex-row'>
       <img 
         src={dog.image} 
         alt={dog.breed} 

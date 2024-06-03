@@ -1,14 +1,16 @@
-import React from 'react';
+import Button from "./Button";
 
 function SubmitButton({ onClick }) {
   return (
-    <button 
+    <Button
       onClick={onClick}
-      className="p-1 mx-2 my-1 text-sm text-white bg-blue-500 rounded-md hover:bg-blue-700"
-    >
-      Submit Answers
-    </button>
+      text="Submit Answers"
+      color="white"
+      bg="blue-500"
+      border="none"
+      hoverBg="blue-700"
+    />
   );
 }
 
-export default SubmitButton;
+export default SubmitButton

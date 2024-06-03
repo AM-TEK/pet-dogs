@@ -1,13 +1,15 @@
-import React from 'react';
+import Button from "./Button";
 
 function FavoriteButton({ onClick }) {
   return (
-    <button
+    <Button
       onClick={onClick}
-      className="p-1 mx-2 my-1 text-sm text-black bg-yellow-300 border border-black rounded-md hover:bg-yellow-500"
-    >
-      Add to Favorites
-    </button>
+      text="Add to Favorites"
+      color="black"
+      bg="yellow-300"
+      border="black"
+      hoverBg="yellow-500"
+    />
   );
 }
 

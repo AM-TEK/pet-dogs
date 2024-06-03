@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import DogQuiz from './DogQuiz';
 import Favorites from './Favorites';
 import SubmitButton from './SubmitButton';
 import FavoriteButton from './FavoriteButton';
 import dogsData from '../../lib/data';
-import Map from './Map';
 
 function DogList() {
   const [dogs, setDogs] = useState(dogsData);
   const [userAnswers, setUserAnswers] = useState({});
-  const [score, setScore] = useState(null);
+  // const [score, setScore] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
 
@@ -21,14 +20,17 @@ function DogList() {
     }));
   };
 
-  const handleSubmit = () => {
-    let calculatedScore = 0;
+  const calculatedScore = useMemo(() => {
+    let score = 0;
     dogs.forEach(dog => {
       if (userAnswers[dog.id] === dog.answer) {
-        calculatedScore++;
+        score++;
       }
     });
-    setScore(calculatedScore);
+    return score;
+  }, [userAnswers, dogs]);
+
+  const handleSubmit = () => {
     setQuizSubmitted(true);
   };
 
@@ -36,6 +38,10 @@ function DogList() {
     if (!favorites.find(favorite => favorite.id === dog.id)) {
       setFavorites([...favorites, { ...dog, favorites: true }]);
     }
+  };
+
+  const removeFromFavorites = (dogToRemove) => {
+    setFavorites(favorites.filter(favorite => favorite.id !== dogToRemove.id));
   };
   
   return (
@@ -45,7 +51,7 @@ function DogList() {
         <h3 className='m-2'>Choose the dog breed based off the picture: </h3>
         <ul>
           {dogs && dogs.map((dog, index) => (
-            <li key={`${dog.id}-${index}`} className="my-2">
+            <li key={dog.id} className="my-2">
               <DogQuiz
                 dog={dog}
                 handleAnswer={handleAnswer}
@@ -60,11 +66,11 @@ function DogList() {
         </ul>
         <div>
           {!quizSubmitted && <SubmitButton onClick={handleSubmit} />}
-          {score !== null && <p className='mx-2'>Score: {(score / dogs.length * 100).toFixed(2)}%</p>}
+          {quizSubmitted && <p className='mx-2'>Score: {(calculatedScore / dogs.length * 100).toFixed(2)}%</p>}
         </div>
       </section>
       <section className="w-full p-2 border-b-4 lg:w-1/2 lg:border-l-4">
-        <Favorites favorites={favorites} quizSubmitted={quizSubmitted} />
+        <Favorites favorites={favorites} quizSubmitted={quizSubmitted} removeFromFavorites={removeFromFavorites} />
       </section>
     </div>
   );
