@@ -5,10 +5,9 @@ import SubmitButton from './SubmitButton';
 import FavoriteButton from './FavoriteButton';
 import dogsData from '../../lib/data';
 
-function DogList() {
+function DogHome() {
   const [dogs, setDogs] = useState(dogsData);
   const [userAnswers, setUserAnswers] = useState({});
-  // const [score, setScore] = useState(null);
   const [favorites, setFavorites] = useState([]);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
 
@@ -76,4 +75,4 @@ function DogList() {
   );
 }
 
-export default DogList;
+export default DogHome;

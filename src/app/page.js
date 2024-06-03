@@ -1,5 +1,5 @@
 "use client";
-import DogList from "@/components/DogList";
+import DogHome from "@/components/DogHome";
 import Header from "@/components/Header";
 import Map from "@/components/Map";
 
@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <DogList />
+      <DogHome />
       <Map />
     </div>
   );
