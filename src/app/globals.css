@@ -3,19 +3,9 @@
 @tailwind utilities;
 
 body {
-  @apply text-gray-700; /* Example color */
+  @apply text-[#1d6d86];
 }
 
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+header {
+  @apply bg-[#deefef]
 }
-
-
-body {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  overflow-x: hidden;
-} */

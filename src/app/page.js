@@ -8,7 +8,11 @@ export default function Home() {
     <div>
       <Header />
       <DogHome />
-      <Map />
+      <div className="flex items-center justify-center">
+        <div className="w-full">
+          <Map />
+        </div>
+      </div>
     </div>
   );
 }

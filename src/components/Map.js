@@ -25,7 +25,7 @@ export default function Maps() {
 
           const options = {
             center: locationInMap,
-            zoom: 15,
+            zoom: 13,
             mapId: 'NEXT_MAPS_TUTS',
           };
 
@@ -68,5 +68,5 @@ export default function Maps() {
     initializeMap();
   }, []);
 
-  return <div className="h-[600px] m-4" ref={mapRef} />;
+  return <div className="h-[400px] m-4 max-w-[70%] mx-auto" ref={mapRef} />;
 }
