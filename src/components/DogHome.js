@@ -55,7 +55,7 @@ function DogHome() {
           ))}
         </ul>
       </section>
-      <section className="w-full p-2 overflow-y-auto bg-[#deefef] flex-1" style={{ maxHeight: '30%' }}>
+      <section className="w-full p-2 overflow-y-auto bg-[#deefef] flex-1 border-t-4" style={{ maxHeight: '20%' }}>
         <Favorites favorites={favorites} removeFromFavorites={removeFromFavorites} />
       </section>
     </div>
